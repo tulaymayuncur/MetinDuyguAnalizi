@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Duygu Analizi Web Sitesi</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #b3d9ff;
+            /* Bebe mavisi */
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            padding: 40px;
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+        }
+
+        h1 {
+            color: #007bff;
+            margin-bottom: 30px;
+            font-size: 28px;
+        }
+
+        .input-container input {
+            width: 100%;
+            padding: 15px;
+            font-size: 16px;
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            transition: border-color 0.3s ease-in-out;
+        }
+
+        .input-container input:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+
+        .input-container button {
+            padding: 15px 20px;
+            font-size: 16px;
+            background-color: darkorange;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        .input-container button:hover {
+            background-color: cornflowerblue;
+        }
+
+        .result-container {
+            margin-top: 20px;
+        }
+
+        .result-container p {
+            font-size: 18px;
+            color: #333;
+        }
+
+        .result-container .emotion {
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1 style="color: cornflowerblue;">Duygu Analizi Web Sitesi</h1>
+        <div class="input-container">
+            <form action="/" method="post">
+                <input type="text" name="text" placeholder="Metin girin..." class="form-control">
+                <button type="submit" class="btn btn-primary btn-block mt-3">Gönder</button>
+            </form>
+        </div>
+        {% if prediction %}
+        <div class="result-container">
+            <h2 style="color:darkorange" class="bold">Analiz Sonuçları</h2>
+            <p style="color: lightslategray;" class="bold">Metin: <span>{{ user_text }}</span></p>
+            {% for emotion, probability in prediction.items() %}
+            <p class="emotion" , style="color:#0056b3">{{ emotion }}: {{ (probability * 100) | round(2) }}%</p>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>
